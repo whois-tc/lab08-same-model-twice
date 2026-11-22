@@ -1,0 +1,11 @@
+# PyTorch and Keras comparison
+
+Both implementations used the same 3,600 training rows, 1,200 validation rows and 1,200 test rows, together with the same 64–32 architecture, mean squared error loss, Adam optimizer, 0.001 learning rate, batch size of 64 and 80 epochs. Each framework was run with seeds 2026, 2027 and 2028.
+
+The first observed difference was performance across seeds. Keras produced an average test MAE of 3.78 rentals, while PyTorch averaged 3.82. This difference is only 0.04 rentals, and each framework won on different seeds: PyTorch was better for seeds 2026 and 2028, while Keras was substantially better for seed 2027. The results therefore do not support claiming that either framework is consistently more accurate.
+
+The second difference was training time. PyTorch averaged 7.41 seconds per run, compared with 11.41 seconds for Keras on the same computer. Keras was approximately 54% slower. For a weekly job this four-second difference is operationally small, but PyTorch was consistently faster in all three runs.
+
+The third difference was the training workflow. Keras handled the loop through one `fit` call and supplied EarlyStopping and ModelCheckpoint callbacks. It automatically created a reloadable `.keras` checkpoint. The PyTorch version made `zero_grad`, `backward` and `step` visible, which required more loop code but made each operation easier to inspect and change. All six runs reached their best validation loss at epoch 80, so neither framework received an advantage from stopping earlier.
+
+I recommend PyTorch for Lakeshore Bike Share. Its accuracy was effectively tied with Keras, it trained faster, and retaining PyTorch reduces future switching work if the team adopts Hugging Face models. The team gives up Keras’s shorter training interface and built-in checkpoint workflow, so it must maintain more explicit training code. I would change the recommendation to Keras if the planned Hugging Face work were cancelled and the team’s main priority became maintaining this small weekly regression job with the least custom training-loop code.
