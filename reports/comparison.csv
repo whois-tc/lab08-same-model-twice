@@ -1,0 +1,7 @@
+framework,seed,best_epoch,validation_mae,test_mae,seconds
+PyTorch,2026,80,3.357,3.214,8.09
+Keras,2026,80,3.5384,3.4617,11.48
+PyTorch,2027,80,4.2958,4.0295,7.21
+Keras,2027,80,3.5427,3.3496,11.46
+PyTorch,2028,80,4.508,4.2053,6.92
+Keras,2028,80,4.8177,4.5327,11.28
