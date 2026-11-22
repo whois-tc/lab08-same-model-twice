@@ -103,3 +103,28 @@ def test_copied_weights_produce_matching_predictions():
         rtol=1e-5,
         atol=1e-5,
     )
+
+
+@pytest.mark.parametrize(
+    "hidden_sizes",
+    [
+        (16, 8),
+        (64, 32),
+        (128, 64, 32),
+    ],
+)
+def test_keras_parameter_count_matches_pytorch(hidden_sizes):
+    pytorch_model = BikeDemandNetwork(
+        input_size=8,
+        hidden_sizes=hidden_sizes,
+    )
+    keras_model = build_keras_model(
+        input_size=8,
+        hidden_sizes=hidden_sizes,
+    )
+
+    pytorch_parameter_count = sum(
+        parameter.numel() for parameter in pytorch_model.parameters()
+    )
+
+    assert keras_model.count_params() == pytorch_parameter_count
