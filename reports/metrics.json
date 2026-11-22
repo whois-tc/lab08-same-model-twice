@@ -1,0 +1,28 @@
+{
+  "selection_rule": "Lowest validation MAE",
+  "selected_run": "fast_learning",
+  "selected_settings": {
+    "hidden_sizes": [
+      64,
+      32
+    ],
+    "learning_rate": 0.01,
+    "batch_size": 64,
+    "epochs": 80,
+    "best_epoch": 51
+  },
+  "results": {
+    "Training mean baseline": {
+      "validation_mae": 9.9519,
+      "test_mae": 9.8484
+    },
+    "Linear regression": {
+      "validation_mae": 9.0322,
+      "test_mae": 8.763
+    },
+    "Neural network": {
+      "validation_mae": 2.4726,
+      "test_mae": 2.3892
+    }
+  }
+}
