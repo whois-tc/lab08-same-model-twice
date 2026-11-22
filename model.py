@@ -1,6 +1,5 @@
 """Neural network for predicting hourly bike rentals."""
 
-import torch
 from torch import nn
 
 
